@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Agenda</title>
+  <link rel="stylesheet" href="./index.css">
+
+</head>
+
+<body>
+
+
+  <div class="navbar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="\img\logo.png" alt="Logo 1" class="logo1">
+       </a>
+    </div>
+    <ul class="menu">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html#informacion">Información</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+    <div class="user">
+      <a href="#"><button class="inse">Iniciar Sesión</button></a>
+      <a href="#"><button class="regis">Registrarse</button></a>
+    </div>
+  </div>
+    <div class="infocont">
+    <section id="informacion-contacto">
+
+        <h3>Para contactarnos, utiliza la información a continuación:</h3>
+        <p>Correo Electrónico:  Agenda.m.e@gmail.com</p>
+
+    </section>
+</div>
+    <section id="formulario-contacto">
+        <h2>Formulario de Contacto</h2>
+        <form action="procesar_formulario.php" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" required></textarea>
+            
+            <input type="submit" value="Enviar">
+        </form>
+    </section>
+
+
+  <footer>
+
+
+
+      <div class="contacto">
+          <h2>Contacto</h2>
+          <p>Correo Electrónico: Agenda.m.e@gmail.com</p>
+          <p>Teléfono: (849) 456-7890</p>
+      </div>
+          <div class="agenda">
+            <p>&copy; 2023 Agenda web</p>
+          </div>
+      </div>
+    
+
+        </footer>
+  <script src="./index.js"></script>
+</body>
+
+</html>
