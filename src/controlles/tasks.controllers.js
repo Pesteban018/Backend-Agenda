@@ -55,9 +55,9 @@ export const updateTasks = async (req, res) => {
 
     if (!task) return res.status(404).json({ message: "Task not found" });
 
-    // Verifica si el campo 'time' está presente en los datos de entrada
+
     if (req.body.time) {
-      // Actualiza el campo 'time' en el documento
+
       task.time = req.body.time;
       await task.save();
     }

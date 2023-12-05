@@ -20,6 +20,11 @@ const userSchema = new mongoose.Schema({
         require: true
     },
 
+    image: {
+        type: String,
+        require: false
+    }
+
     
 
 
