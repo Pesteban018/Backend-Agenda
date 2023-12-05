@@ -17,7 +17,7 @@ export const registerSchema = z.object({
     })
     .min(8, {
       message: "La contraseña debe tener minimo 8 caracteres",
-    }),
+    }),   
 });
 
 export const loginSchema = z.object({

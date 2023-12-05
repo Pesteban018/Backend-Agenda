@@ -4,6 +4,34 @@ import { createAccesToken } from "../libs/jwt.js";
 import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
 
+export const actulizarUsuario = async (req, res) => {
+  const id = req.user.id
+  const input  = req.body;
+  console.log(input);
+  console.log("estamos en actualizar usuario");
+  console.log(id);
+  try {
+
+    if(input.password){
+      input.password = await bcrypt.hash(input.password, 10);
+    }
+    const userUpdated = await User.findByIdAndUpdate(id, input, {new:true})
+    console.log(userUpdated)
+    res.json({
+      id: userUpdated._id,
+      username: userUpdated.username,
+      email: userUpdated.email,
+      createAt: userUpdated.createdAt,
+      updateAt: userUpdated.updatedAt,
+      image: userUpdated.image
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.messge });
+  }
+};
+// 
+
 export const register = async (req, res) => {
   const { email, username, password } = req.body;
 
@@ -57,6 +85,7 @@ export const login = async (req, res) => {
       email: userFound.email,
       createAt: userFound.createdAt,
       updateAt: userFound.updatedAt,
+      image: userFound.image,
     });
   } catch (error) {
     res.status(500).json({ messge: error.messge });
@@ -73,13 +102,9 @@ export const profile = async (req, res) => {
   const userFound = await User.findById(req.user.id);
   if (!userFound) return res.status(400).json({ message: "User not found" });
 
-  return res.json({
-    id: userFound._id,
-    username: userFound.username,
-    email: userFound.email,
-    createAt: userFound.createdAt,
-    updateAt: userFound.updatedAt,
-  });
+  return res.json(
+    userFound
+  );
   res.send("profile");
 };
 
@@ -97,6 +122,7 @@ export const verifyToken = async (req, res) => {
       id: userFound._id,
       username: userFound.username,
       email: userFound.email,
+      image: userFound.image,
     });
   });
 };
