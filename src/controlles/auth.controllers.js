@@ -21,6 +21,8 @@ export const actulizarUsuario = async (req, res) => {
       id: userUpdated._id,
       username: userUpdated.username,
       email: userUpdated.email,
+      name: userUpdated.name,
+      firstname: userUpdated.firstname,
       createAt: userUpdated.createdAt,
       updateAt: userUpdated.updatedAt,
       image: userUpdated.image
@@ -33,7 +35,7 @@ export const actulizarUsuario = async (req, res) => {
 // 
 
 export const register = async (req, res) => {
-  const { email, username, password } = req.body;
+  const { email, username, password, name, firstname } = req.body;
 
   try {
     const userFound = await User.findOne({ email });
@@ -44,6 +46,8 @@ export const register = async (req, res) => {
     const newUser = new User({
       username,
       email,
+      name,
+      firstname,
       password: passwordHash,
     });
 
@@ -56,6 +60,8 @@ export const register = async (req, res) => {
       id: userSave._id,
       username: userSave.username,
       email: userSave.email,
+      name: userSave.name,
+      firstname: userSave.firstname,
       createAt: userSave.createdAt,
       updateAt: userSave.updatedAt,
     });
@@ -122,6 +128,8 @@ export const verifyToken = async (req, res) => {
       id: userFound._id,
       username: userFound.username,
       email: userFound.email,
+      name: userFound.name,
+      firstname: userFound.firstname,
       image: userFound.image,
     });
   });
