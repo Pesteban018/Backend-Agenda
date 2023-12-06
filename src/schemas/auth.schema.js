@@ -8,9 +8,6 @@ export const registerSchema = z.object({
     required_error: "Apellidos requerido",
   }),
 
-
-
-
   username: z.string({
     required_error: "Username requerido",
   }),
