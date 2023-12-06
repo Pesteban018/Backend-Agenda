@@ -1,20 +1,13 @@
-// auth.middleware.js
 import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
 
 export const authRequired = (req, res, next) => {
   const { token } = req.cookies;
-
-  if (!token) {
-    return res.status(401).json({ message: "No token, authorization denied" });
-  }
+  if (!token)
+    return res.status(401).json({ message: "No token, authotization danied" });
 
   jwt.verify(token, TOKEN_SECRET, (err, user) => {
-    if (err) {
-      // Token inválido o expirado
-      // No es necesario eliminar la cookie, ya que es una cookie de sesión
-      return res.status(403).json({ message: "Token inválido" });
-    }
+    if (err) return res.status(403).json({ message: "Token invalido" });
 
     req.user = user;
     next();
