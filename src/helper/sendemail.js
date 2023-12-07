@@ -4,10 +4,10 @@ import { google } from 'googleapis';
 
 const router = express.Router();
 
-const CLIENT_ID = '324505200444-c246anim6lphth7g85kc1uv8t6bhh0u0.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
+const CLIENT_ID = '440013674915-rj0fihk6rupa1kg796frc8md4s51nskc.apps.googleusercontent.com';
+const CLIENT_SECRET = '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';
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
-const REFRESH_TOKEN = '1//04Uiz5FTTcn8FCgYIARAAGAQSNwF-L9IrzS_y0fIMaCCijo75LXdqLkPt6ANAzcRPyLSh1IjJPFY8LVhTHFt-3EvMl0RE1C-WBaU';
+const REFRESH_TOKEN = '1//04ixWWY8z5Y90CgYIARAAGAQSNwF-L9Irzzy13pi2XttLUCoSMz4Hq0Z0XqDvva1_gBj8EWUg5J30WQqfUiuRSVZdR3uscavNrwo';
 
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
@@ -16,7 +16,7 @@ const createTrans = async () => nodemailer.createTransport({
   service: 'gmail',
   auth: {
     type: 'OAuth2',
-    user: 'e8293498569@gmail.com@gmail.com',
+    user: 'bducvj@gmail.com',
     clientId: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
     refreshToken: REFRESH_TOKEN,
@@ -30,7 +30,7 @@ router.post('/send-email', async (req, res) => {
     const transporter = await createTrans();
 
     const configEmail = {
-      from: '"Pricenotify" <noreply@pricenotify.info>',
+      from: '"AgendaME" <noreply@agendame.info>',
       to,
       subject,
       html,
