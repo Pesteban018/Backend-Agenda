@@ -1,3 +1,4 @@
+import sendEmail from "../helper/sendemail.js";
 import Task from "../models/task.model.js";
 
 export const getTasks = async (req, res) => {
@@ -23,6 +24,12 @@ try {
     user: req.user.id,
   });
   const savedTask = await newTask.save();
+  console.log(req.user)
+ sendEmail({
+    to: req.user.email,
+    subject: "Tarea registrada con exito",
+    html:`<h3><span style="color:blue;">${req.user.name}</span> Tarea registrada con exito</h3><h1>${title}</h1><p>${description}</p>`,
+       });
   res.json(savedTask);
 } catch (error) {
   return res.status(500).json({ message: "Something went wrong" });

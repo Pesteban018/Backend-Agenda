@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import { createAccesToken } from "../libs/jwt.js";
 import jwt from "jsonwebtoken";
 import { TOKEN_SECRET } from "../config.js";
+import sendemail from "../helper/sendemail.js"
+
 
 export const actulizarUsuario = async (req, res) => {
   const id = req.user.id
@@ -52,10 +54,16 @@ export const register = async (req, res) => {
     });
 
     const userSave = await newUser.save();
-    const token = await createAccesToken({ id: userSave._id });
+    const token = await createAccesToken({ id: userSave._id,name: userSave.name, email: userSave.email });
 
     res.cookie("token", token);
 
+    await sendemail({
+      to: email,
+      subject: 'Registro Completado',
+      html: `<h3><span style="color:blue;">${name} ${firstname}</span> Se ha registrado con éxito en PriceNotify</h3>`,
+    }); 
+    
     res.json({
       id: userSave._id,
       username: userSave.username,
@@ -81,7 +89,7 @@ export const login = async (req, res) => {
 
     if (!isMatch) return res.status(400).json({ message: "Contraseña incorrecta" });
 
-    const token = await createAccesToken({ id: userFound._id });
+    const token = await createAccesToken({ id: userFound._id, name: userFound.name, email: userFound.email  });
 
     res.cookie("token", token);
 
